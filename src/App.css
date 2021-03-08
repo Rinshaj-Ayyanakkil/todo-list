@@ -41,7 +41,7 @@
 	padding: 5px;
 	margin: 5px;
 	width: fit-content;
-	justify-content: right;
+	justify-content: center;
 	background-color: #f2f2f2;
 }
 
@@ -76,13 +76,20 @@
 	background-color: #c40000;
 }
 
-input {
+input,
+textarea {
 	border: 0;
 	padding: 10px;
-	width: 30%;
+	width: fit-content;
+	font-family: "ubuntu";
 	margin: 5;
 	margin-top: 10;
 	background-color: #f2f2f2;
+}
+
+textarea {
+	background-color: #ffffff;
+	resize: none;
 }
 
 select {

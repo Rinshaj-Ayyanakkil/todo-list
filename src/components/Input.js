@@ -27,6 +27,8 @@ export default class Input extends Component {
 				text: this.state.inputText,
 				isFinsihed: false,
 				datetime: Date.now(),
+				note: "",
+				due: "",
 			});
 		}
 		this.setState({ inputText: "" });

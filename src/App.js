@@ -5,12 +5,14 @@ import Todo from "./components/Todo";
 import Filter from "./components/Filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-library.add(faTrashAlt);
-library.add(faCheckSquare);
-library.add(faPlus);
+import {
+	faTrashAlt,
+	faCheckSquare,
+	faPlus,
+	faCaretDown,
+	faCaretUp,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faTrashAlt, faCheckSquare, faPlus, faCaretUp, faCaretDown);
 
 class App extends Component {
 	state = {
@@ -36,6 +38,15 @@ class App extends Component {
 		});
 	};
 
+	toggleAll = () => {
+		this.setState({
+			isAllFinished: !this.state.isAllFinished,
+			todos: this.state.todos.map((todo) => {
+				return { ...todo, isFinished: !this.state.isAllFinished };
+			}),
+		});
+	};
+
 	toggleFinished = (id) => {
 		this.setState({
 			todos: this.state.todos.map((todo) => {
@@ -49,11 +60,15 @@ class App extends Component {
 		});
 	};
 
-	toggleAll = () => {
+	handleTodoChange = (id, prop, value) => {
 		this.setState({
-			isAllFinished: !this.state.isAllFinished,
 			todos: this.state.todos.map((todo) => {
-				return { ...todo, isFinished: !this.state.isAllFinished };
+				return todo.id === id
+					? {
+							...todo,
+							[prop]: value,
+					  }
+					: todo;
 			}),
 		});
 	};
@@ -125,6 +140,7 @@ class App extends Component {
 						<Todo
 							key={todo.id}
 							todo={todo}
+							onChange={(prop, value) => this.handleTodoChange(todo.id, prop, value)}
 							toggleFinished={() => this.toggleFinished(todo.id)}
 							deleteTodo={() => this.deleteTodo(todo.id)}
 						/>

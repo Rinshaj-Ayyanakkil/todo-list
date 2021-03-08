@@ -8,7 +8,7 @@ export default class Filter extends Component {
 
 	render() {
 		return (
-			<select onChange={this.handleChange}>
+			<select value={this.props.value} onChange={this.handleChange}>
 				<option>All</option>
 				<option>Active</option>
 				<option>Finished</option>

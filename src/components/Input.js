@@ -1,5 +1,6 @@
 import "../App.css";
 import { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Input extends Component {
 	state = {
@@ -25,6 +26,7 @@ export default class Input extends Component {
 				id: Math.random(),
 				text: this.state.inputText,
 				isFinsihed: false,
+				datetime: Date.now(),
 			});
 		}
 		this.setState({ inputText: "" });
@@ -41,7 +43,7 @@ export default class Input extends Component {
 							placeholder={this.state.placeholder}
 						/>
 						<button className="btn" type="submit">
-							add
+							<FontAwesomeIcon icon="plus" />
 						</button>
 					</div>
 					{this.state.error ? (

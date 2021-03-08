@@ -3,6 +3,14 @@ import { Component } from "react";
 import Input from "./components/Input";
 import Todo from "./components/Todo";
 import Filter from "./components/Filter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+library.add(faTrashAlt);
+library.add(faCheckSquare);
+library.add(faPlus);
 
 class App extends Component {
 	state = {
@@ -10,6 +18,17 @@ class App extends Component {
 		filterType: "All",
 		isAllFinished: false,
 	};
+
+	componentDidMount() {
+		let data = localStorage.getItem("state")
+			? localStorage.getItem("state")
+			: JSON.stringify(this.state);
+		this.setState(JSON.parse(data));
+	}
+
+	componentDidUpdate() {
+		localStorage.setItem("state", JSON.stringify(this.state));
+	}
 
 	addTodo = (newTodo) => {
 		this.setState({
@@ -75,23 +94,23 @@ class App extends Component {
 				style={{
 					margin: " 0 auto",
 					textAlign: "center",
-					width: "50%",
-					backgroundColor: "thistle",
 				}}
 			>
 				<h1>To-Do List</h1>
 				<Input onSubmit={this.addTodo} />
 				<div>
-					<Filter onChange={this.handleFilterChange} />
+					<Filter onChange={this.handleFilterChange} value={this.state.filterType} />
 					{this.filterList().length ? (
 						<button className="btn btn-danger" onClick={this.clearList}>
-							Clear All
+							Clear All Finished
+							<FontAwesomeIcon icon="trash-alt" />
 						</button>
 					) : null}
 
 					{this.state.todos.length ? (
 						<button className="btn" onClick={this.toggleAll}>
 							Mark All as Finished
+							<FontAwesomeIcon icon="check-square" />
 						</button>
 					) : null}
 				</div>

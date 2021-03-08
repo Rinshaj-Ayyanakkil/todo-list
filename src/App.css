@@ -38,14 +38,23 @@
 }
 
 .todo {
-	padding: 10px;
+	padding: 5px;
 	margin: 5px;
 	width: fit-content;
+	justify-content: right;
 	background-color: #f2f2f2;
 }
 
 .todo * {
 	display: inline-block;
+}
+
+.todo p {
+	display: flex;
+	margin: 2px;
+	justify-content: flex-end;
+	font-size: small;
+	font-family: sans-serif;
 }
 
 .btn {

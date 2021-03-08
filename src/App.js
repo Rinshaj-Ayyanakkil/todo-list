@@ -102,7 +102,7 @@ class App extends Component {
 					<Filter onChange={this.handleFilterChange} value={this.state.filterType} />
 					{this.filterList().length ? (
 						<button className="btn btn-danger" onClick={this.clearList}>
-							Clear All Finished
+							Clear All
 							<FontAwesomeIcon icon="trash-alt" />
 						</button>
 					) : null}
